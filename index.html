@@ -2,39 +2,141 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Muller TikTok Downloader</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <style>
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#0a0a0f;
-color:#fff;
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
 margin:0;
 }
 
-.container{
-max-width:900px;
-margin:auto;
+header{
+background:#020617;
 padding:20px;
+font-size:24px;
+font-weight:bold;
 }
 
-.hero{
-text-align:center;
-margin-top:60px;
+.container{
+margin-top:80px;
 }
 
-h1{
-font-size:38px;
-margin-bottom:10px;
+input{
+width:60%;
+padding:15px;
+border-radius:8px;
+border:none;
+font-size:16px;
 }
 
-p{
-color:#aaa;
+button{
+padding:15px 25px;
+border:none;
+background:#22c55e;
+color:white;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
 }
 
-.card{
+button:hover{
+background:#16a34a;
+}
+
+#result{
+margin-top:40px;
+}
+
+.download-btn{
+display:inline-block;
+margin-top:20px;
+padding:15px 30px;
+background:#3b82f6;
+color:white;
+border-radius:8px;
+text-decoration:none;
+font-size:18px;
+}
+
+footer{
+margin-top:100px;
+padding:20px;
+font-size:14px;
+color:#9ca3af;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+Muller TikTok Downloader
+</header>
+
+<div class="container">
+
+<h2>Download TikTok Videos Without Watermark</h2>
+
+<input id="url" placeholder="Paste TikTok link here">
+
+<br><br>
+
+<button onclick="download()">Download</button>
+
+<div id="result"></div>
+
+</div>
+
+<footer>
+© 2026 Muller TikTok Downloader
+</footer>
+
+<script>
+
+function download(){
+
+let url=document.getElementById("url").value
+
+if(url==""){
+alert("Paste TikTok URL")
+return
+}
+
+document.getElementById("result").innerHTML="Processing..."
+
+fetch("https://api.tiklydown.eu.org/api/download?url="+url)
+.then(res=>res.json())
+.then(data=>{
+
+let video=data.video.noWatermark
+
+document.getElementById("result").innerHTML=
+`
+<a class="download-btn" href="${video}" target="_blank">
+Download Video
+</a>
+`
+
+})
+
+.catch(()=>{
+
+document.getElementById("result").innerHTML="Error downloading video"
+
+})
+
+}
+
+</script>
+
+</body>
+</html>.card{
 margin-top:30px;
 background:#13131a;
 padding:25px;
